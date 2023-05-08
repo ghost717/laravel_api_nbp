@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\CurrencyService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/sync', function (CurrencyService $currencyService) {
+    $currencyService->fetchCurrencyRates();
+    return 'Currencies synchronized. '.date('Y-m-d H:i:s');
 });
